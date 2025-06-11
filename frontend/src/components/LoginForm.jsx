@@ -3,10 +3,13 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import Button from "./Button";
 import Input from "./Input";
+import animationError from "../assets/error.json";
+import Lottie from "lottie-react";
 
 function LoginForm() {
   const [form, setForm] = useState({ username: "", password: "" });
   const [error, setError] = useState(null);
+  const [showError, setShowError] = useState(false);
   const navigate = useNavigate();
 
   // Update the username/password form upon text entry
@@ -30,8 +33,10 @@ function LoginForm() {
     } catch (err) {
       if (err.response && err.response.data) {
         setError(err.response.data.error);
+        setShowError(true);
       } else {
         setError("An unknown error occured.");
+        setShowError(true);
       }
     }
   };
@@ -39,6 +44,16 @@ function LoginForm() {
   return (
     <div className="flex flex-col items-center justify-center min-h-screen px-4">
       <h1 className="text-4xl font-semibold mb-8 tracking-tight">_Login_</h1>
+      {error && (
+        <div className="flex flex-col items-center mb-4">
+          <Lottie
+            animationData={animationError}
+            loop={false}
+            className="w-16 h-16 mb-2"
+          />
+          <p className="text-red-400">{error}</p>
+        </div>
+      )}
       <form onSubmit={handleSubmit} className="flex flex-col items-center">
         <Input
           name="username"
@@ -59,7 +74,6 @@ function LoginForm() {
         />
         <Button type="submit">Log In</Button>
       </form>
-      {error && <p style={{ color: "red" }}> {error}</p>}
     </div>
   );
 }

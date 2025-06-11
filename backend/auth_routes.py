@@ -50,11 +50,11 @@ def login():
     # Check if user exists
     user = Users.query.filter_by(username = username).first()
     if not user:
-        return jsonify({"error": "invalid username or password"}), 401 
+        return jsonify({"error": "Invalid username or password"}), 401 
     
     # Check password hash
     if not check_password_hash(user.password, password):
-        return jsonify({"error": "invalid username or password"}), 401 
+        return jsonify({"error": "Invalid username or password"}), 401 
     
     # Create JWT token
     token = jwt.encode({
