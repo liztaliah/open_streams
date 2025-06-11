@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import Button from "./Button";
+import Input from "./Input";
 
 function LoginForm() {
   const [form, setForm] = useState({ username: "", password: "" });
@@ -39,7 +40,7 @@ function LoginForm() {
     <div className="flex flex-col items-center justify-center min-h-screen px-4">
       <h1 className="text-4xl font-semibold mb-4 tracking-tight">_Login_</h1>
       <form onSubmit={handleSubmit} className="flex flex-col items-center">
-        <input
+        <Input
           name="username"
           value={form.username}
           onChange={handleChange}
@@ -47,7 +48,7 @@ function LoginForm() {
           required
           className="px-3 py-2 rounded"
         />
-        <input
+        <Input
           type="password"
           name="password"
           value={form.password}
