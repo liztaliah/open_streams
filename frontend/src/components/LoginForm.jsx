@@ -38,7 +38,7 @@ function LoginForm() {
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen px-4">
-      <h1 className="text-4xl font-semibold mb-4 tracking-tight">_Login_</h1>
+      <h1 className="text-4xl font-semibold mb-8 tracking-tight">_Login_</h1>
       <form onSubmit={handleSubmit} className="flex flex-col items-center">
         <Input
           name="username"
@@ -46,7 +46,7 @@ function LoginForm() {
           onChange={handleChange}
           placeholder="Username"
           required
-          className="px-3 py-2 rounded"
+          className="mb-0.5 px-3 py-2 rounded-t-lg rounded-b-none"
         />
         <Input
           type="password"
@@ -55,7 +55,7 @@ function LoginForm() {
           onChange={handleChange}
           placeholder="Password"
           required
-          className="mb-4 px-3 py-2 rounded"
+          className="mb-8 px-3 py-2 rounded-t-none rounded-b-lg"
         />
         <Button type="submit">Log In</Button>
       </form>
