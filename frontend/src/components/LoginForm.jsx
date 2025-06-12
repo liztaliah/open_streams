@@ -48,7 +48,7 @@ function LoginForm() {
           opacity: error ? 1 : 0,
         }}
       >
-        {error && (
+        {error /* fun little animation for failed auth */ && (
           <>
             <Lottie
               animationData={animationError}
