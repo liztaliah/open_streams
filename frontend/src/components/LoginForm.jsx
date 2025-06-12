@@ -22,10 +22,9 @@ function LoginForm() {
     setError(null); // Clear old errors
 
     try {
-      const response = await axios.post("/api/login", form);
-
-      // Save token to localStorage
-      localStorage.setItem("token", response.data.token);
+      const response = await axios.post("/api/login", form, {
+        withCredentials: true,
+      });
 
       // Redirect to the user list -- Change This to HomePage
       navigate("/home");
