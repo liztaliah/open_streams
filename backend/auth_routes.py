@@ -1,6 +1,6 @@
 import jwt
 import datetime
-from flask import Blueprint, request, jsonify, current_app
+from flask import Blueprint, request, jsonify, current_app, make_response
 from werkzeug.security import generate_password_hash, check_password_hash
 from functools import wraps
 from .models import Users
@@ -10,15 +10,9 @@ from . import db
 def token_required(f):
     @wraps(f)
     def decorated(*args, **kwargs):
-        token = None
+        # Gets token from cookies
+        token = request.cookies.get("token")
 
-        # Check for authorization header
-        if 'Authorization' in request.headers:
-            auth_header = request.headers['Authorization']
-            if auth_header.startswith("Bearer "):
-                # Split the auth_header string to get only the token
-                token = auth_header.split(" ")[1]
-        
         # Return error if no token
         if not token:
             return jsonify({"error": "Token is missing!"}), 401
@@ -95,12 +89,12 @@ def login():
         "exp": datetime.datetime.utcnow() + datetime.timedelta(hours=2)
     }, current_app.config["SECRET_KEY"], algorithm="HS256")
 
-    # Return token
-    return jsonify({
-        "message": "Login successful!",
-        "token": token,
-        "user": {
-            "id": user.id,
-            "username": user.username
-        }
-    }), 200
+    # Save the jwt token as a cookie in the browser
+    response = make_response(jsonify({"message": "Login successfull"}))
+    response.set_cookie(
+        "token", token,
+        httponly=True,
+        secure=True,
+        samesite="Strict"
+    )
+    return response
