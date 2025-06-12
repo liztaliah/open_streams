@@ -8,6 +8,7 @@ import Lottie from "lottie-react";
 
 function SignupForm() {
   const [form, setForm] = useState({ username: "", password: "" });
+  const [showForm, setShowForm] = useState(true);
   const [error, setError] = useState(null);
   const navigate = useNavigate();
 
@@ -23,7 +24,7 @@ function SignupForm() {
 
     try {
       await axios.post("/api/signup", form);
-      navigate("/login");
+      setShowForm(false);
     } catch (err) {
       if (err.response && err.response.data) {
         setError(err.response.data.error);
@@ -54,29 +55,33 @@ function SignupForm() {
           </>
         )}
       </div>
-      <form
-        onSubmit={handleSubmit}
-        className="flex flex-col items-center w-full max-w-xs"
-      >
-        <Input
-          name="username"
-          value={form.username}
-          onChange={handleChange}
-          placeholder="Username"
-          required
-          className="mb-0.5 px-3 py-2 rounded-t-lg rounded-b-none"
-        />
-        <Input
-          type="password"
-          name="password"
-          value={form.password}
-          onChange={handleChange}
-          placeholder="Password"
-          required
-          className="mb-8 px-3 py-2 rounded-t-none rounded-b-lg"
-        />
-        <Button type="submit">Sign Up</Button>
-      </form>
+      {showForm && (
+        <div>
+          <form
+            onSubmit={handleSubmit}
+            className="flex flex-col items-center w-full max-w-xs"
+          >
+            <Input
+              name="username"
+              value={form.username}
+              onChange={handleChange}
+              placeholder="Username"
+              required
+              className="mb-0.5 px-3 py-2 rounded-t-lg rounded-b-none"
+            />
+            <Input
+              type="password"
+              name="password"
+              value={form.password}
+              onChange={handleChange}
+              placeholder="Password"
+              required
+              className="mb-8 px-3 py-2 rounded-t-none rounded-b-lg"
+            />
+            <Button type="submit">Sign Up</Button>
+          </form>
+        </div>
+      )}
     </div>
   );
 }
