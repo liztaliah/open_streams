@@ -99,6 +99,7 @@ def login():
     )
     return response
     
+# Check-auth route to authenticate
 @auth.route("/check-auth", methods=["GET"])
 @token_required
 def check_auth(current_user):

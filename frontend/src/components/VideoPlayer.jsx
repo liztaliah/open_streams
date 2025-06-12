@@ -13,16 +13,19 @@ function VideoPlayer() {
   }, [navigate]);
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen px-4">
-      <h1>_OpenStreams_</h1>
+    <div className="flex flex-col items-center min-h-screen px-4">
+      <h1 className="text-4xl font-semibold mt-8 mb-8">_OpenStreams_</h1>
       <video
         src="/api/video"
         controls
         autoplay
-        className="w-full max-w-2xl rounded-lg"
+        className="w-full max-w-6xl rounded-lg bg-black"
+        style={{ objectFit: "contain" }}
       >
         Your browser does not support the video tag
       </video>
     </div>
   );
 }
+
+export default VideoPlayer;
