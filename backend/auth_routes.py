@@ -98,3 +98,8 @@ def login():
         samesite="Strict"
     )
     return response
+    
+@auth.route("/check-auth", methods=["GET"])
+@token_required
+def check_auth(current_user):
+    return jsonify({"message": "Authenticated"}), 200
