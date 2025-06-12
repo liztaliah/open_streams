@@ -4,11 +4,13 @@ import axios from "axios";
 import Input from "./Input";
 import Button from "./Button";
 import animationError from "../assets/error.json";
+import animationSuccess from "../assets/success.json";
 import Lottie from "lottie-react";
 
 function SignupForm() {
   const [form, setForm] = useState({ username: "", password: "" });
   const [showForm, setShowForm] = useState(true);
+  const [showSucess, setShowSuccess] = useState(false);
   const [error, setError] = useState(null);
   const navigate = useNavigate();
 
@@ -23,8 +25,9 @@ function SignupForm() {
     setError(null); // Clear old errors
 
     try {
-      await axios.post("/api/signup", form);
-      setShowForm(false);
+      await axios.post("/api/signup", form); // Post to signup API
+      setShowForm(false); // Hide signup form if API post succeeds
+      setShowSuccess(true); // Play animation
     } catch (err) {
       if (err.response && err.response.data) {
         setError(err.response.data.error);
@@ -56,7 +59,7 @@ function SignupForm() {
         )}
       </div>
       {showForm && (
-        <div>
+        <div className="flex flex-col items-center">
           <form
             onSubmit={handleSubmit}
             className="flex flex-col items-center w-full max-w-xs"
@@ -76,12 +79,31 @@ function SignupForm() {
               onChange={handleChange}
               placeholder="Password"
               required
-              className="mb-8 px-3 py-2 rounded-t-none rounded-b-lg"
+              className="mb-4 px-3 py-2 rounded-t-none rounded-b-lg"
             />
             <Button type="submit">Sign Up</Button>
           </form>
         </div>
       )}
+      <div
+        className="transition-all duration-700 overflow-hidden flex flex-col items-center mb-2"
+        style={{
+          maxHeight: showSucess ? 200 : 0,
+          opacity: showSucess ? 1 : 0,
+        }}
+      >
+        {showSucess && (
+          <>
+            <Lottie
+              animationData={animationSuccess}
+              loop={false}
+              className="w-16 h-16 mb-2"
+            />
+            <p className="text-green-300 mb-8">account created successfully</p>
+          </>
+        )}
+      </div>
+      <Button>Login</Button>
     </div>
   );
 }
