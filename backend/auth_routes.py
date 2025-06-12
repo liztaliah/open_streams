@@ -2,8 +2,41 @@ import jwt
 import datetime
 from flask import Blueprint, request, jsonify, current_app
 from werkzeug.security import generate_password_hash, check_password_hash
+from functools import wraps
 from .models import Users
 from . import db
+
+# Function for checking for auth token
+def token_required(f):
+    @wraps(f)
+    def decorated(*args, **kwargs):
+        token = None
+
+        # Check for authorization header
+        if 'Authorization' in request.headers:
+            auth_header = request.headers['Authorization']
+            if auth_header.startswith("Bearer "):
+                # Split the auth_header string to get only the token
+                token = auth_header.split(" ")[1]
+        
+        # Return error if no token
+        if not token:
+            return jsonify({"error": "Token is missing!"}), 401
+
+        # Decode JWT and find the user in the database
+        try:
+            data = jwt.decode(token, current_app.config["SECRET_KEY"], algorithms=["HS256"])
+            current_user = Users.query.filter_by(id=data['user_id']).first()
+            if not current_user:
+                return jsonify({"error": "User not found!"}), 401
+        except jwt.ExpiredSignatureError:
+            return jsonify({"error": "Token has expired!"}), 401
+        except jwt.InvalidTokenError:
+            return jsonify({"error": "Invalid token!"}), 401
+        
+        # Return the wrapped function passing the current user
+        return f(current_user, *args, **kwargs)
+    return decorated
 
 # Blueprint for all authentication routes
 auth = Blueprint("auth", __name__, url_prefix="/api")
