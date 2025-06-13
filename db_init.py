@@ -1,6 +1,6 @@
-from backend import db, create_app
-
-app = create_app()
+from backend import db
+from backend.main import app
 
 with app.app_context():
     db.create_all()
+    print('database initialized')
