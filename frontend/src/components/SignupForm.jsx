@@ -46,35 +46,29 @@ function SignupForm() {
       <h1 className="text-4xl font-semibold mb-4 tracking-tight">_SignUp_</h1>
       {/* Error container */}
       <div
-        className="transition-all duration-500 overflow-hidden flex flex-col items-center mb-2"
+        className="transition-all duration-500 overflow-hidden mb-2"
         style={{
           maxHeight: error ? 100 : 0,
           opacity: error ? 1 : 0,
         }}
       >
-        {error /* fun little animation for failed auth */ && (
-          <>
+        {error && (
+          <div className="flex flex-col items-center">
             <Lottie
               animationData={animationError}
               loop={false}
               className="w-12 h-12 mb-2"
             />
             <p className="text-red-400">{error}</p>
-          </>
+          </div>
         )}
       </div>
+
       {/* Shared container for form and success message */}
-      <div
-        className="relative flex flex-col items-center justify-center transition-all duration-500 overflow-hidden"
-        style={{
-          height: 175,
-          width: "100%",
-          maxWidth: 320,
-        }}
-      >
+      <div className="relative transition-all duration-500 overflow-hidden flex flex-col items-center h-[175px] w-full max-w-[320px]">
         {/* Form */}
         <div
-          className="absolute inset-0 flex flex-col items-center justify-center w-full transition-all duration-500"
+          className="absolute inset-0 w-full h-full transition-opacity duration-500"
           style={{
             opacity: showForm ? 1 : 0,
             pointerEvents: showForm ? "auto" : "none",
@@ -88,10 +82,7 @@ function SignupForm() {
         >
           <form
             onSubmit={handleSubmit}
-            className="flex flex-col items-center w-full max-w-xs"
-            style={{
-              visibility: showForm ? "visible" : "hidden",
-            }}
+            className="flex flex-col items-center w-full max-w-xs mt-2"
           >
             <Input
               name="username"
@@ -118,7 +109,7 @@ function SignupForm() {
         </div>
         {/* Success message */}
         <div
-          className="absolute inset-0 flex flex-col items-center justify-center w-full transition-all duration-500"
+          className="absolute inset-0 flex flex-col items-center justify-center w-full h-full transition-opacity duration-500"
           style={{
             opacity: showSuccess ? 1 : 0,
             pointerEvents: showSuccess ? "auto" : "none",
