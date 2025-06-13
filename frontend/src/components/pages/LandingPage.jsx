@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import Lottie from "lottie-react";
 import Button from "./Button";
-import logoAnimation from "../assets/logo.json";
+import logoAnimation from "../../assets/logo.json";
 import { useEffect, useState } from "react";
 
 function Landing() {

@@ -1,12 +1,12 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import Input from "./Input";
-import Button from "./Button";
-import animationError from "../assets/error.json";
-import animationSuccess from "../assets/success.json";
+import Input from "../common/Input";
+import Button from "../common/Button";
+import animationError from "../../assets/error.json";
+import animationSuccess from "../../assets/success.json";
 import Lottie from "lottie-react";
-import ErrorMessage from "./ErrorMessage";
+import ErrorMessage from "../common/ErrorMessage";
 
 function SignupForm() {
   const [form, setForm] = useState({ username: "", password: "" });

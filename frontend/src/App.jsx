@@ -1,9 +1,9 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import LandingPage from "./components/LandingPage";
-import LoginForm from "./components/LoginForm";
-import SignupForm from "./components/SignupForm";
-import VideoPlayer from "./components/VideoPlayer";
-import Layout from "./components/Layout";
+import LandingPage from "./components/pages/LandingPage";
+import LoginForm from "./components/pages/LoginForm";
+import SignupForm from "./components/pages/SignupForm";
+import VideoPlayer from "./components/pages/VideoPlayer";
+import Layout from "./components/layout/Layout";
 
 function App() {
   return (

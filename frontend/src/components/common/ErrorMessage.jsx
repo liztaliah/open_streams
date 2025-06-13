@@ -1,5 +1,5 @@
 import Lottie from "lottie-react";
-import animationError from "../assets/error.json";
+import animationError from "../../assets/error.json";
 
 export default function ErrorMessage({ error }) {
   return (

@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import Button from "./Button";
-import Input from "./Input";
-import ErrorMessage from "./ErrorMessage";
+import Button from "../common/Button";
+import Input from "../common/Input";
+import ErrorMessage from "../common/ErrorMessage";
 
 function LoginForm() {
   const [form, setForm] = useState({ username: "", password: "" });
