@@ -36,17 +36,11 @@ function SignupForm() {
     e.preventDefault(); // Prevents the page from reloading
     setError(null); // Clear old errors
 
-    submitAuthForm(
-      "/api/signup",
-      form,
-      setError,
-      setShowError,
-      () => {
-        setShowForm(false);
-        // Wait for hide animation to finish before playing checkmark
-        setPendingSuccess(true);
-      }
-    );
+    submitAuthForm("/api/signup", form, setError, setShowError, () => {
+      setShowForm(false);
+      // Wait for hide animation to finish before playing checkmark
+      setPendingSuccess(true);
+    });
   };
 
   return (
@@ -97,11 +91,11 @@ function SignupForm() {
               required
               className="mb-8 px-3 py-2 rounded-t-none rounded-b-lg"
             />
-            <div className="flex space-x-3">
-              <Button type="submit">Sign Up</Button>
-              <Button onClick={() => navigate("/login")}>Log In</Button>
-            </div>
           </form>
+          <div className="flex justify-center space-x-3">
+            <Button type="submit">Sign Up</Button>
+            <Button onClick={() => navigate("/login")}>Log In</Button>
+          </div>
         </div>
         {/* Success message */}
         <div

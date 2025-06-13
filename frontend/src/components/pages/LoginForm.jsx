@@ -61,8 +61,8 @@ function LoginForm() {
             required
             className="mb-8 px-3 py-2 rounded-t-none rounded-b-lg"
           />
-          <Button type="submit">Log In</Button>
         </form>
+        <Button type="submit">Log In</Button>
       </FormContainer>
     </div>
   );
