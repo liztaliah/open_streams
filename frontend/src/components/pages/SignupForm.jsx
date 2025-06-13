@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
+import { submitAuthForm } from "../../utils/auth";
 import Input from "../common/Input";
 import Button from "../common/Button";
 import animationSuccess from "../../assets/success.json";
@@ -32,23 +32,21 @@ function SignupForm() {
   };
 
   // Submit the username/password and await the response from the API
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault(); // Prevents the page from reloading
     setError(null); // Clear old errors
 
-    try {
-      await axios.post("/api/signup", form); // Post to signup API
-      setShowForm(false); // Hide signup form if API post succeeds
-      // Wait for hide animation to finish before playing checkmark
-      setPendingSuccess(true);
-    } catch (err) {
-      if (err.response && err.response.data) {
-        setError(err.response.data.error);
-      } else {
-        setError("An unknown error occured.");
+    submitAuthForm(
+      "/api/signup",
+      form,
+      setError,
+      setShowError,
+      () => {
+        setShowForm(false);
+        // Wait for hide animation to finish before playing checkmark
+        setPendingSuccess(true);
       }
-      setShowError(true);
-    }
+    );
   };
 
   return (

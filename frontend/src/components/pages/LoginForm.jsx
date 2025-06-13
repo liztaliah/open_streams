@@ -1,10 +1,10 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
 import Button from "../common/Button";
 import Input from "../common/Input";
 import ErrorMessage from "../common/ErrorMessage";
 import FormContainer from "../layout/FormContainer";
+import { submitAuthForm } from "../../utils/auth";
 
 function LoginForm() {
   const [form, setForm] = useState({ username: "", password: "" });
@@ -20,25 +20,11 @@ function LoginForm() {
   };
 
   // Submit the username/password and await the response from the API
-  const handleSubmit = async (e) => {
-    e.preventDefault(); // Prevents the page from reloading
-    setError(null); // Clear old errors
-
-    try {
-      await axios.post("/api/login", form, {
-        withCredentials: true,
-      });
-
-      // Redirect to the user list -- Change This to HomePage
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    submitAuthForm("/api/login", form, setError, setShowError, () => {
       navigate("/home");
-    } catch (err) {
-      if (err.response && err.response.data) {
-        setError(err.response.data.error);
-      } else {
-        setError("An unknown error occured.");
-      }
-      setShowError(true);
-    }
+    });
   };
 
   return (
