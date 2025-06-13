@@ -31,7 +31,7 @@ function Landing() {
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen px-4">
-      <h1 className="text-4xl font-semibold mb-4 tracking-tight">
+      <h1 className="text-4xl font-semibold mb-8 tracking-tight">
         _{displayed}_
       </h1>
       {/* Animated logo to container animates after heading */}

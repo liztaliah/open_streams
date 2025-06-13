@@ -15,7 +15,7 @@ export default function ErrorMessage({ error }) {
           <Lottie
             animationData={animationError}
             loop={false}
-            className="w-12 h-12 mb-2"
+            className="w-12 h-12 mb-2 mt-1"
           />
           <p className="text-red-400">{error}</p>
         </div>
