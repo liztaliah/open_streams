@@ -3,10 +3,10 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import Input from "../common/Input";
 import Button from "../common/Button";
-import animationError from "../../assets/error.json";
 import animationSuccess from "../../assets/success.json";
 import Lottie from "lottie-react";
 import ErrorMessage from "../common/ErrorMessage";
+import FormContainer from "../layout/FormContainer";
 
 function SignupForm() {
   const [form, setForm] = useState({ username: "", password: "" });
@@ -46,9 +46,7 @@ function SignupForm() {
     <div className="flex flex-col items-center justify-center min-h-screen px-4">
       <h1 className="text-4xl font-semibold mb-4 tracking-tight">_SignUp_</h1>
       <ErrorMessage error={error} />
-
-      {/* Shared container for form and success message */}
-      <div className="relative transition-all duration-500 overflow-hidden flex flex-col items-center h-[175px] w-full max-w-[320px]">
+      <FormContainer>
         {/* Form */}
         <div
           className="absolute inset-0 w-full h-full transition-opacity duration-500"
@@ -112,7 +110,7 @@ function SignupForm() {
             </>
           )}
         </div>
-      </div>
+      </FormContainer>
     </div>
   );
 }

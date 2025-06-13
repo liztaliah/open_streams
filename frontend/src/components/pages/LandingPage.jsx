@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import Lottie from "lottie-react";
-import Button from "./Button";
+import Button from "../common/Button";
 import logoAnimation from "../../assets/logo.json";
 import { useEffect, useState } from "react";
 
@@ -31,7 +31,7 @@ function Landing() {
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen px-4">
-      <h1 className="text-4xl font-semibold mb-8 tracking-tight">
+      <h1 className="text-4xl font-semibold mb-4 tracking-tight">
         _{displayed}_
       </h1>
       {/* Animated logo to container animates after heading */}
