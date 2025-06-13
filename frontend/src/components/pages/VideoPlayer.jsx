@@ -18,7 +18,7 @@ function VideoPlayer() {
       <video
         src="/api/video"
         controls
-        autoplay
+        autoPlay
         className="w-full max-w-6xl rounded-lg bg-black"
         style={{ objectFit: "contain" }}
       >

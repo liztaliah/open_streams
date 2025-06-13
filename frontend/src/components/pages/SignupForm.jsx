@@ -9,12 +9,17 @@ import ErrorMessage from "../common/ErrorMessage";
 import FormContainer from "../layout/FormContainer";
 
 function SignupForm() {
+  // States for updating input form and hiding/showing animations
   const [form, setForm] = useState({ username: "", password: "" });
   const [showForm, setShowForm] = useState(true);
 
+  // States for showing the success animation
+  // Pending the input form transition out
   const [pendingSuccess, setPendingSuccess] = useState(false);
   const [showSuccess, setShowSuccess] = useState(false);
 
+  // Sets for setting the error messages from API
+  // Show state for smooth animation transition
   const [error, setError] = useState(null);
   const [showError, setShowError] = useState(false);
 
