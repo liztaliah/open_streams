@@ -6,6 +6,7 @@ import Button from "./Button";
 import animationError from "../assets/error.json";
 import animationSuccess from "../assets/success.json";
 import Lottie from "lottie-react";
+import ErrorMessage from "./ErrorMessage";
 
 function SignupForm() {
   const [form, setForm] = useState({ username: "", password: "" });
@@ -44,25 +45,7 @@ function SignupForm() {
   return (
     <div className="flex flex-col items-center justify-center min-h-screen px-4">
       <h1 className="text-4xl font-semibold mb-4 tracking-tight">_SignUp_</h1>
-      {/* Error container */}
-      <div
-        className="transition-all duration-500 overflow-hidden mb-2"
-        style={{
-          maxHeight: error ? 100 : 0,
-          opacity: error ? 1 : 0,
-        }}
-      >
-        {error && (
-          <div className="flex flex-col items-center">
-            <Lottie
-              animationData={animationError}
-              loop={false}
-              className="w-12 h-12 mb-2"
-            />
-            <p className="text-red-400">{error}</p>
-          </div>
-        )}
-      </div>
+      <ErrorMessage error={error} />
 
       {/* Shared container for form and success message */}
       <div className="relative transition-all duration-500 overflow-hidden flex flex-col items-center h-[175px] w-full max-w-[320px]">
