@@ -1,12 +1,12 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { submitAuthForm } from "../../utils/auth";
-import Input from "../common/Input";
 import Button from "../common/Button";
 import animationSuccess from "../../assets/success.json";
 import Lottie from "lottie-react";
 import ErrorMessage from "../common/ErrorMessage";
 import FormContainer from "../layout/FormContainer";
+import UserPassForm from "../common/UserPassFields";
 
 function SignupForm() {
   // States for updating input form and hiding/showing animations
@@ -70,32 +70,16 @@ function SignupForm() {
             }
           }}
         >
-          <form
+          <UserPassForm
+            form={form}
+            onChange={handleChange}
             onSubmit={handleSubmit}
-            className="flex flex-col items-center w-full max-w-xs mt-2"
+            buttonText="Sign Up"
           >
-            <Input
-              name="username"
-              value={form.username}
-              onChange={handleChange}
-              placeholder="Username"
-              required
-              className="mb-0.5 px-3 py-2 rounded-t-lg rounded-b-none"
-            />
-            <Input
-              type="password"
-              name="password"
-              value={form.password}
-              onChange={handleChange}
-              placeholder="Password"
-              required
-              className="mb-8 px-3 py-2 rounded-t-none rounded-b-lg"
-            />
-          </form>
-          <div className="flex justify-center space-x-3">
-            <Button type="submit">Sign Up</Button>
-            <Button onClick={() => navigate("/login")}>Log In</Button>
-          </div>
+            <Button type="button" onClick={() => navigate("/login")}>
+              Log In
+            </Button>
+          </UserPassForm>
         </div>
         {/* Success message */}
         <div
