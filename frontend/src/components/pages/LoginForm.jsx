@@ -9,10 +9,13 @@ import FormContainer from "../layout/FormContainer";
 function LoginForm() {
   const [form, setForm] = useState({ username: "", password: "" });
   const [error, setError] = useState(null);
+  const [showError, setShowError] = useState(false);
+
   const navigate = useNavigate();
 
   // Update the username/password form upon text entry
   const handleChange = (e) => {
+    if (error) setShowError(false); // Start fade out, don't clear error yet
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
@@ -34,13 +37,22 @@ function LoginForm() {
       } else {
         setError("An unknown error occured.");
       }
+      setShowError(true);
     }
   };
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen px-4">
       <h1 className="text-4xl font-semibold mb-4 tracking-tight">_Login_</h1>
-      <ErrorMessage error={error} />
+      <ErrorMessage
+        error={error}
+        show={showError}
+        onTransitionEnd={() => {
+          if (!showError && error) {
+            setError(null); // Clear the error after fade out
+          }
+        }}
+      />
       <FormContainer>
         <form
           onSubmit={handleSubmit}
