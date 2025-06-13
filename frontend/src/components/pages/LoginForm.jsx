@@ -25,7 +25,7 @@ function LoginForm() {
     setError(null); // Clear old errors
 
     try {
-      const response = await axios.post("/api/login", form, {
+      await axios.post("/api/login", form, {
         withCredentials: true,
       });
 
