@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import Button from "../common/Button";
 import ErrorMessage from "../common/ErrorMessage";
 import FormContainer from "../layout/FormContainer";
+import Input from "../common/Input";
 
 export default function CreateRoomForm() {
   const [name, setName] = useState("");
@@ -23,7 +24,7 @@ export default function CreateRoomForm() {
       const response = await axios.post(
         "/api/rooms/",
         { name },
-        { withCredentials: true } // Send secure cookie with request
+        { withCredentials: true }
       );
       setName("");
       navigate(`/room/${response.data.id}`);
@@ -35,7 +36,9 @@ export default function CreateRoomForm() {
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen px-4">
-      <h1 className="text-4xl font-semibold mb-4 tracking-tight">Create a Room</h1>
+      <h1 className="text-4xl font-semibold mb-4 tracking-tight">
+        Create a Room
+      </h1>
       <ErrorMessage
         error={error}
         show={showError}
@@ -48,13 +51,13 @@ export default function CreateRoomForm() {
           onSubmit={handleSubmit}
           className="flex flex-col items-center w-full max-w-xs"
         >
-          <input
+          <Input
             type="text"
             value={name}
             onChange={handleChange}
             placeholder="Room Name"
             required
-            className="mb-2 px-3 py-2 rounded bg-neutral-700 text-white"
+            className="mb-2"
           />
           <Button type="submit">Create Room</Button>
         </form>

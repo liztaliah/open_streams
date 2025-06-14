@@ -22,7 +22,7 @@ function LoginForm() {
   const handleSubmit = (e) => {
     e.preventDefault();
     submitAuthForm("/api/login", form, setError, setShowError, () => {
-      navigate("/home");
+      navigate("/create-room");
     });
   };
 
