@@ -7,3 +7,6 @@ backend/.env
 
 # Backend assets
 backend/assets
+
+# Plan file
+High-Level-Plan.md

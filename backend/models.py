@@ -27,3 +27,17 @@ class Videos(db.Model):
 
     def __repr__(self):
         return f'<Video {self.title} by User {self.user_id}, uploaded at {self.upload_time}>'
+
+# Class for viewing rooms
+class Rooms(db.Model):
+    __tablename__ = "Rooms"
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(128), unique=True, nullable=False)
+    host_id = db.Column(db.Integer, db.ForeignKey('Users.id'), nullable=False)
+    created_at = db.Column(db.DateTime(timezone=True), server_default=func.now())
+
+    # Backref to view all rooms a user is hosting
+    host = db.relationship('Users', backref=db.backref('hosted_rooms', lazy=True))
+
+    def __repr__(self):
+        return f'<Room {self.name} hosted by User {self.host_id}, created at {self.created_at}>'
