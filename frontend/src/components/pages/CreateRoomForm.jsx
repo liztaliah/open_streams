@@ -29,7 +29,12 @@ export default function CreateRoomForm() {
       setName("");
       navigate(`/room/${response.data.id}`);
     } catch (err) {
-      setError(err.response?.data?.error || "Could not create room.");
+      const errorMsg = err.response?.data?.error;
+      if (errorMsg === "Token has expired!") {
+        navigate("/login"); // Navigate to login page for exp token
+        return;
+      }
+      setError(errorMsg || "Could not create room.");
       setShowError(true);
     }
   };
@@ -57,7 +62,7 @@ export default function CreateRoomForm() {
             onChange={handleChange}
             placeholder="Room Name"
             required
-            className="mb-2"
+            className="rounded-lg mb-2"
           />
           <Button type="submit">Create Room</Button>
         </form>
