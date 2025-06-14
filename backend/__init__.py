@@ -19,7 +19,9 @@ def create_app():
 
     from .views import views
     from .auth_routes import auth
+    from .rooms import rooms
     app.register_blueprint(views)
     app.register_blueprint(auth)
+    app.register_blueprint(rooms)
 
     return app
