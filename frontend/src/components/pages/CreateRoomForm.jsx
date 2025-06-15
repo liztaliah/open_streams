@@ -29,14 +29,14 @@ export default function CreateRoomForm() {
       (response) => {
         navigate(`/room/${response.data.id}`);
       },
-      { withCredentials: true } // <-- send cookies (token)
+      { withCredentials: true }
     );
   };
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen px-4">
       <h1 className="text-4xl font-semibold mb-4 tracking-tight">
-        Create a Room
+        _CreateRoom_
       </h1>
       <ErrorMessage
         error={error}
@@ -56,9 +56,9 @@ export default function CreateRoomForm() {
             onChange={handleChange}
             placeholder="Room Name"
             required
-            className="rounded-lg mb-2"
+            className="text-center rounded-lg mb-6"
           />
-          <Button type="submit">Create Room</Button>
+          <Button type="submit">Create</Button>
         </form>
       </FormContainer>
     </div>
