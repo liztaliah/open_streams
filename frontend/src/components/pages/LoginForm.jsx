@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import ErrorMessage from "../common/ErrorMessage";
 import FormContainer from "../layout/FormContainer";
-import { submitAuthForm } from "../../utils/auth";
+import { submitForm } from "../../utils/submitForm";
 import UserPassForm from "../common/UserPassFields";
 
 function LoginForm() {
@@ -21,7 +21,7 @@ function LoginForm() {
   // Submit the username/password and await the response from the API
   const handleSubmit = (e) => {
     e.preventDefault();
-    submitAuthForm("/api/login", form, setError, setShowError, () => {
+    submitForm("/api/login", form, setError, setShowError, () => {
       navigate("/create-room");
     });
   };

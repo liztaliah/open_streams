@@ -1,6 +1,6 @@
 import axios from "axios";
 
-export async function submitAuthForm(
+export async function submitForm(
   endpoint,
   form,
   setError,

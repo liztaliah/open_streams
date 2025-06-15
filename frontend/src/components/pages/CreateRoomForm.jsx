@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import Button from "../common/Button";
 import ErrorMessage from "../common/ErrorMessage";
 import FormContainer from "../layout/FormContainer";
+import { submitForm } from "../../utils/submitForm";
 import Input from "../common/Input";
 
 export default function CreateRoomForm() {
@@ -12,31 +13,25 @@ export default function CreateRoomForm() {
   const [showError, setShowError] = useState(false);
   const navigate = useNavigate();
 
+  // Set input on form change
   const handleChange = (e) => {
     if (error) setShowError(false);
     setName(e.target.value);
   };
 
+  // Submit room creation form
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setError(null);
-    try {
-      const response = await axios.post(
-        "/api/rooms/",
-        { name },
-        { withCredentials: true }
-      );
-      setName("");
-      navigate(`/room/${response.data.id}`);
-    } catch (err) {
-      const errorMsg = err.response?.data?.error;
-      if (errorMsg === "Token has expired!") {
-        navigate("/login"); // Navigate to login page for exp token
-        return;
-      }
-      setError(errorMsg || "Could not create room.");
-      setShowError(true);
-    }
+    submitForm(
+      "/api/rooms",
+      { name },
+      setError,
+      setShowError,
+      () => {
+        navigate(`/room/${response.data.id}`);
+      },
+      { withCredentials: true }
+    );
   };
 
   return (
