@@ -5,12 +5,13 @@ export async function submitForm(
   form,
   setError,
   setShowError,
-  onSuccess
+  onSuccess,
+  options = {}
 ) {
   setError(null);
   try {
-    await axios.post(endpoint, form);
-    if (onSuccess) onSuccess();
+    const response = await axios.post(endpoint, form, options);
+    if (onSuccess) onSuccess(response);
   } catch (err) {
     if (err.response && err.response.data) {
       setError(err.response.data.error);

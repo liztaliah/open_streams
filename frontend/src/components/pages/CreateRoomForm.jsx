@@ -1,5 +1,4 @@
 import { useState } from "react";
-import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import Button from "../common/Button";
 import ErrorMessage from "../common/ErrorMessage";
@@ -27,10 +26,10 @@ export default function CreateRoomForm() {
       { name },
       setError,
       setShowError,
-      () => {
+      (response) => {
         navigate(`/room/${response.data.id}`);
       },
-      { withCredentials: true }
+      { withCredentials: true } // <-- send cookies (token)
     );
   };
 
