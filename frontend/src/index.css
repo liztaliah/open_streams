@@ -1,3 +1,29 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* stylelint-disable property-no-vendor-prefix */
+
+@keyframes autofill-repaint-for-real {
+  0%,
+  100% {
+    color: #fff;
+    background-color: #404040;
+  }
+}
+
+.input-dark:-webkit-autofill {
+  animation-name: autofill-repaint-for-real;
+  animation-fill-mode: both;
+  animation-duration: 50000s;
+  animation-delay: 0s;
+  -webkit-box-shadow: 0 0 0 1000px #404040 inset !important;
+  box-shadow: 0 0 0 1000px #404040 inset !important;
+  background-color: #404040 !important;
+  -webkit-text-fill-color: #fff !important;
+  color: #fff !important;
+  caret-color: #fff !important;
+  font: inherit !important;
+}
+
+/* stylelint-enable property-no-vendor-prefix */

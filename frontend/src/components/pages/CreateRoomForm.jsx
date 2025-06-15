@@ -56,7 +56,7 @@ export default function CreateRoomForm() {
             onChange={handleChange}
             placeholder="Room Name"
             required
-            className="text-center rounded-lg mb-6"
+            className="text-center rounded-lg mt-2 mb-8"
           />
           <Button type="submit">Create</Button>
         </form>
