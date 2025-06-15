@@ -7,7 +7,7 @@ export default function RoomPage() {
   const { roomId } = useParams();
   const [room, setRoom] = useState(null);
   const [error, setError] = useState(null);
-  const [showError, setShowError] = useState(false);
+  const [showError, setShowError] = useState(false); // For error animation
   const navigate = useNavigate();
 
   // Fetch room data
