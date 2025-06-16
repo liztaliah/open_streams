@@ -34,7 +34,15 @@ export default function CreateRoomForm() {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen px-4">
+    <div
+      className="
+        flex 
+        flex-col 
+        items-center 
+        justify-center
+        min-h-screen 
+        px-4"
+    >
       <h1 className="text-4xl font-semibold mb-4 tracking-tight">
         _CreateRoom_
       </h1>

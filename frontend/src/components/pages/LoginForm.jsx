@@ -1,14 +1,16 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import ErrorMessage from "../common/ErrorMessage";
+import UserPassForm from "../common/UserPassFields";
 import FormContainer from "../layout/FormContainer";
 import { submitForm } from "../../utils/submitForm";
-import UserPassForm from "../common/UserPassFields";
+import { UserContext } from "../../context/UserContext";
 
 function LoginForm() {
   const [form, setForm] = useState({ username: "", password: "" });
   const [error, setError] = useState(null);
   const [showError, setShowError] = useState(false);
+  const { setUsername } = useContext(UserContext);
 
   const navigate = useNavigate();
 
@@ -22,6 +24,7 @@ function LoginForm() {
   const handleSubmit = (e) => {
     e.preventDefault();
     submitForm("/api/login", form, setError, setShowError, () => {
+      setUsername(form.username);
       navigate("/create-room");
     });
   };
