@@ -1,6 +1,7 @@
 export default function Input({ className = "", ...props }) {
   return (
     <input
+      spellCheck="false"
       className={`
         input-dark
         px-4 
