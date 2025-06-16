@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import ErrorMessage from "../common/ErrorMessage";
 import UserPassForm from "../common/UserPassFields";
 import FormContainer from "../layout/FormContainer";
-import { submitForm } from "../../utils/submitForm";
+import { submitRequest } from "../../utils/submitRequest";
 import { UserContext } from "../../context/UserContext";
 
 function LoginForm() {
@@ -23,8 +23,8 @@ function LoginForm() {
   // Submit the username/password and await the response from the API
   const handleSubmit = (e) => {
     e.preventDefault();
-    submitForm("/api/login", form, setError, setShowError, () => {
-      setUsername(form.username);
+    submitRequest("post", "/api/login", form, setError, setShowError, () => {
+      setUsername(form.username); // Set the username to access later
       navigate("/create-room");
     });
   };

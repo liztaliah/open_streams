@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import Button from "../common/Button";
 import ErrorMessage from "../common/ErrorMessage";
 import FormContainer from "../layout/FormContainer";
-import { submitForm } from "../../utils/submitForm";
+import { submitRequest } from "../../utils/submitRequest";
 import { UserContext } from "../../context/UserContext";
 
 export default function CreateRoomForm() {
@@ -14,7 +14,8 @@ export default function CreateRoomForm() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    submitForm(
+    submitRequest(
+      "post",
       "/api/rooms",
       { name: username }, // Use username as room name
       setError,

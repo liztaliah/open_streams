@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { submitForm } from "../../utils/submitForm";
+import { submitRequest } from "../../utils/submitRequest";
 import Button from "../common/Button";
 import animationSuccess from "../../assets/success.json";
 import Lottie from "lottie-react";
@@ -36,11 +36,18 @@ function SignupForm() {
     e.preventDefault(); // Prevents the page from reloading
     setError(null); // Clear old errors
 
-    submitForm("/api/signup", form, setError, setShowError, () => {
-      setShowForm(false);
-      // Wait for hide animation to finish before playing checkmark
-      setPendingSuccess(true);
-    });
+    submitRequest(
+      "post",
+      "/api/signup",
+      form,
+      setError,
+      setShowError,
+      () => {
+        setShowForm(false);
+        // Wait for hide animation to finish before playing checkmark
+        setPendingSuccess(true);
+      }
+    );
   };
 
   return (
