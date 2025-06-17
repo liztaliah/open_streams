@@ -52,8 +52,12 @@ function SignupForm() {
   };
 
   return (
+    // Layout that centers everything on the page
     <PageCenterLayout>
+      {/* Page title */}
       <h1 className="text-4xl font-semibold mb-4 tracking-tight">_SignUp_</h1>
+
+      {/* Animated error message */}
       <ErrorMessage
         error={error}
         show={showError}
@@ -61,14 +65,17 @@ function SignupForm() {
           if (!showError && error) setError(null);
         }}
       />
+
+      {/* Container for the form and success message */}
       <FormContainer>
-        {/* Form */}
+        {/* Signup form with fade transition */}
         <SuccessFade
           style={{
             opacity: showForm ? 1 : 0,
             pointerEvents: showForm ? "auto" : "none",
           }}
           onTransitionEnd={() => {
+            // When form fades out, show the success animation
             if (!showForm && pendingSuccess) {
               setShowSuccess(true);
               setPendingSuccess(false);
@@ -81,18 +88,21 @@ function SignupForm() {
             onSubmit={handleSubmit}
             buttonText="Sign Up"
           >
+            {/* Button to switch to login page */}
             <Button type="button" onClick={() => navigate("/login")}>
               Log In
             </Button>
           </UserPassForm>
         </SuccessFade>
-        {/* Success message */}
+
+        {/* Success message with fade transition */}
         <SuccessFade
           style={{
             opacity: showSuccess ? 1 : 0,
             pointerEvents: showSuccess ? "auto" : "none",
           }}
         >
+          {/* Show success message only when signup is successful */}
           {showSuccess && <SuccessMessage onLogin={() => navigate("/login")} />}
         </SuccessFade>
       </FormContainer>
