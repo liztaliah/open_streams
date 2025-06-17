@@ -36,22 +36,23 @@ function SignupForm() {
     e.preventDefault(); // Prevents the page from reloading
     setError(null); // Clear old errors
 
-    submitRequest(
-      "post",
-      "/api/signup",
-      form,
-      setError,
-      setShowError,
-      () => {
-        setShowForm(false);
-        // Wait for hide animation to finish before playing checkmark
-        setPendingSuccess(true);
-      }
-    );
+    submitRequest("post", "/api/signup", form, setError, setShowError, () => {
+      setShowForm(false);
+      // Wait for hide animation to finish before playing checkmark
+      setPendingSuccess(true);
+    });
   };
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen px-4">
+    <div
+      className="
+      flex 
+      flex-col 
+      items-center 
+      justify-center 
+      min-h-screen 
+      px-4"
+    >
       <h1 className="text-4xl font-semibold mb-4 tracking-tight">_SignUp_</h1>
       <ErrorMessage
         error={error}
@@ -65,7 +66,13 @@ function SignupForm() {
       <FormContainer>
         {/* Form */}
         <div
-          className="absolute inset-0 w-full h-full transition-opacity duration-500"
+          className="
+          absolute 
+          inset-0 
+          w-full 
+          h-full 
+          transition-opacity 
+          duration-500"
           style={{
             opacity: showForm ? 1 : 0,
             pointerEvents: showForm ? "auto" : "none",
@@ -90,7 +97,17 @@ function SignupForm() {
         </div>
         {/* Success message */}
         <div
-          className="absolute inset-0 flex flex-col items-center justify-center w-full h-full transition-opacity duration-500"
+          className="
+            absolute 
+            inset-0 
+            flex 
+            flex-col 
+            items-center 
+            justify-center 
+            w-full 
+            h-full 
+            transition-opacity 
+            duration-500"
           style={{
             opacity: showSuccess ? 1 : 0,
             pointerEvents: showSuccess ? "auto" : "none",

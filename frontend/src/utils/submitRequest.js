@@ -21,5 +21,6 @@ export async function submitRequest(
   } catch (err) {
     setError(err.response?.data?.error || "An unknown error occurred.");
     setShowError(true);
+    throw err;
   }
 }

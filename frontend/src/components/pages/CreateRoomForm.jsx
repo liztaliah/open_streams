@@ -24,7 +24,11 @@ export default function CreateRoomForm() {
         navigate(`/room/${response.data.id}`);
       },
       { withCredentials: true }
-    );
+    ).catch((err) => {
+      if (err.response?.status === 401) {
+        navigate("/login");
+      }
+    });
   };
 
   return (
@@ -42,9 +46,12 @@ export default function CreateRoomForm() {
       <FormContainer>
         <form
           onSubmit={handleSubmit}
-          className="flex flex-col items-center w-full max-w-xs"
+          className="flex flex-col items-center mt-2 w-full max-w-xs"
         >
-          <Button type="submit">Host</Button>
+          <div className="flex space-x-4">
+            <Button type="submit">Host</Button>
+            <Button type="submit">Viewer</Button>
+          </div>
         </form>
       </FormContainer>
     </div>
