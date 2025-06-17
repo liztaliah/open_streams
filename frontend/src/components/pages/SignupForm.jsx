@@ -1,11 +1,19 @@
+// React and third-party libraries
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+
+// Utilities
 import { submitRequest } from "../../utils/submitRequest";
-import Button from "../common/Button";
-import animationSuccess from "../../assets/success.json";
-import Lottie from "lottie-react";
-import ErrorMessage from "../common/ErrorMessage";
+
+// Layout components
+import PageCenterLayout from "../layout/PageCenterLayout";
 import FormContainer from "../layout/FormContainer";
+import SuccessFade from "../layout/SuccessFade";
+
+// Common/reusable components
+import Button from "../common/Button";
+import ErrorMessage from "../common/ErrorMessage";
+import SuccessMessage from "../common/SuccessMessage";
 import UserPassForm from "../common/UserPassFields";
 
 function SignupForm() {
@@ -44,35 +52,18 @@ function SignupForm() {
   };
 
   return (
-    <div
-      className="
-      flex 
-      flex-col 
-      items-center 
-      justify-center 
-      min-h-screen 
-      px-4"
-    >
+    <PageCenterLayout>
       <h1 className="text-4xl font-semibold mb-4 tracking-tight">_SignUp_</h1>
       <ErrorMessage
         error={error}
         show={showError}
         onTransitionEnd={() => {
-          if (!showError && error) {
-            setError(null); // Now clear the error after fade out
-          }
+          if (!showError && error) setError(null);
         }}
       />
       <FormContainer>
         {/* Form */}
-        <div
-          className="
-          absolute 
-          inset-0 
-          w-full 
-          h-full 
-          transition-opacity 
-          duration-500"
+        <SuccessFade
           style={{
             opacity: showForm ? 1 : 0,
             pointerEvents: showForm ? "auto" : "none",
@@ -94,41 +85,18 @@ function SignupForm() {
               Log In
             </Button>
           </UserPassForm>
-        </div>
+        </SuccessFade>
         {/* Success message */}
-        <div
-          className="
-            absolute 
-            inset-0 
-            flex 
-            flex-col 
-            items-center 
-            justify-center 
-            w-full 
-            h-full 
-            transition-opacity 
-            duration-500"
+        <SuccessFade
           style={{
             opacity: showSuccess ? 1 : 0,
             pointerEvents: showSuccess ? "auto" : "none",
           }}
         >
-          {showSuccess && (
-            <>
-              <Lottie
-                animationData={animationSuccess}
-                loop={false}
-                className="w-16 h-16 mb-2"
-              />
-              <p className="text-green-300 mb-8">
-                account created successfully
-              </p>
-              <Button onClick={() => navigate("/login")}>Log In</Button>
-            </>
-          )}
-        </div>
+          {showSuccess && <SuccessMessage onLogin={() => navigate("/login")} />}
+        </SuccessFade>
       </FormContainer>
-    </div>
+    </PageCenterLayout>
   );
 }
 
