@@ -5,6 +5,7 @@ import ErrorMessage from "../common/ErrorMessage";
 import FormContainer from "../layout/FormContainer";
 import { submitRequest } from "../../utils/submitRequest";
 import { UserContext } from "../../context/UserContext";
+import PageCenterLayout from "../layout/PageCenterLayout";
 
 export default function CreateRoomForm() {
   const [error, setError] = useState(null);
@@ -32,7 +33,7 @@ export default function CreateRoomForm() {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen px-4">
+    <PageCenterLayout>
       <h1 className="text-4xl font-semibold mb-4 tracking-tight">
         _CreateRoom_
       </h1>
@@ -44,16 +45,15 @@ export default function CreateRoomForm() {
         }}
       />
       <FormContainer>
-        <form
-          onSubmit={handleSubmit}
-          className="flex flex-col items-center mt-2 w-full max-w-xs"
-        >
-          <div className="flex space-x-4">
+        <div className="flex space-x-4 mt-4">
+          <form onSubmit={handleSubmit}>
             <Button type="submit">Host</Button>
+          </form>
+          <form onSubmit={handleSubmit}>
             <Button type="submit">Viewer</Button>
-          </div>
-        </form>
+          </form>
+        </div>
       </FormContainer>
-    </div>
+    </PageCenterLayout>
   );
 }

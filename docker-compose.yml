@@ -1,0 +1,10 @@
+version: "3"
+services:
+  nginx-rtmp:
+    image: alfg/nginx-rtmp
+    ports:
+      - "1935:1935" # RTMP (for OBS)
+      - "8080:80" # HTTP (for HLS playback)
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./hls:/tmp/hls
