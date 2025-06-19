@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 import ErrorMessage from "../common/ErrorMessage";
+import StreamPlayer from "../common/StreamPlayer";
 
 export default function RoomPage() {
   const { roomId } = useParams();
@@ -47,23 +48,17 @@ export default function RoomPage() {
     );
   }
 
+  // Replace with your actual logic for getting the stream key
+  const streamKey = room?.streamKey || "test";
+
   return (
     <div className="flex flex-col items-center justify-center min-h-screen px-4">
       <h1 className="text-3xl font-semibold mb-4">{room.name}</h1>
       <p className="mb-4 text-neutral-400">
         Hosted by user ID: <span className="font-mono">{room.host_id}</span>
       </p>
-      {/* Placeholder for video player */}
-      <div className="w-full max-w-2xl bg-black rounded-lg mb-8">
-        <video
-          controls
-          className="w-full rounded-lg"
-          style={{ objectFit: "contain" }}
-        >
-          <source src="/api/video" type="video/mp4" />
-          Your browser does not support the video tag.
-        </video>
-      </div>
+      {/* Stream Player */}
+      <StreamPlayer src={`http://localhost:8080/hls/${streamKey}.m3u8`} />
       {/* Placeholder for future: list of users in the room */}
       {/* <div>Users in this room: ...</div> */}
     </div>
