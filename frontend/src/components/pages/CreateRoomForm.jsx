@@ -10,20 +10,45 @@ import PageCenterLayout from "../layout/PageCenterLayout";
 export default function CreateRoomForm() {
   const [error, setError] = useState(null);
   const [showError, setShowError] = useState(false);
-  const [roomlist, setRoomList] = useState([]);
   const navigate = useNavigate();
   const { username } = useContext(UserContext); // Get username from context
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    // 1. Fetch the list of rooms
     submitRequest(
-      "post",
+      "get",
       "/api/rooms",
-      { name: username },
+      null,
       setError,
       setShowError,
-      (response) => {
-        navigate(`/room/${response.data.id}`);
+      async (response) => {
+        const rooms = response.data;
+        // 2. Check if a room with the username exists
+        const existingRoom = rooms.find((room) => room.name === username);
+
+        if (existingRoom) {
+          // 3. If it exists, navigate to that room
+          navigate(`/room/${existingRoom.id}`);
+        } else {
+          // 4. If not, create the room and navigate to it
+          submitRequest(
+            "post",
+            "/api/rooms",
+            { name: username },
+            setError,
+            setShowError,
+            (postResponse) => {
+              navigate(`/room/${postResponse.data.id}`);
+            },
+            { withCredentials: true }
+          ).catch((err) => {
+            if (err.response?.status === 401) {
+              navigate("/login");
+            }
+          });
+        }
       },
       { withCredentials: true }
     ).catch((err) => {
