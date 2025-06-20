@@ -10,19 +10,24 @@ import PageCenterLayout from "../layout/PageCenterLayout";
 export default function CreateRoomForm() {
   const [error, setError] = useState(null);
   const [showError, setShowError] = useState(false);
+  const [roomlist, setRoomList] = useState([]);
   const navigate = useNavigate();
-  const { username } = useContext(UserContext); // Get username from context
+  const { username } = useContext(UserContext);
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e, method) => {
     e.preventDefault();
     submitRequest(
-      "post",
+      method,
       "/api/rooms",
-      { name: username }, // Use username as room name
+      method === "post" ? { name: username } : null,
       setError,
       setShowError,
       (response) => {
-        navigate(`/room/${response.data.id}`);
+        if (method === "post") {
+          navigate(`/room/${response.data.id}`);
+        } else if (method === "get") {
+          setRoomList(response.data);
+        }
       },
       { withCredentials: true }
     ).catch((err) => {
@@ -46,14 +51,23 @@ export default function CreateRoomForm() {
       />
       <FormContainer>
         <div className="flex space-x-4 mt-4">
-          <form onSubmit={handleSubmit}>
+          <form onSubmit={(e) => handleSubmit(e, "post")}>
             <Button type="submit">Host</Button>
           </form>
-          <form onSubmit={handleSubmit}>
+          <form onSubmit={(e) => handleSubmit(e, "get")}>
             <Button type="submit">Viewer</Button>
           </form>
         </div>
       </FormContainer>
+      <div>
+        <ul>
+          {roomlist.map((room, idx) => (
+            <li key={room.id || idx}>
+              {room.id}: {room.name}
+            </li>
+          ))}
+        </ul>
+      </div>
     </PageCenterLayout>
   );
 }
