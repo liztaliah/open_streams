@@ -5,6 +5,7 @@ import SignupForm from "./components/pages/SignupForm";
 import VideoPlayer from "./components/pages/VideoPlayer";
 import CreateRoomForm from "./components/pages/CreateRoomForm";
 import RoomPage from "./components/pages/RoomPage";
+import RoomIndex from "./components/pages/RoomIndex";
 import Layout from "./components/layout/Layout";
 
 function App() {
@@ -17,6 +18,7 @@ function App() {
           <Route path="/login" element={<LoginForm />} />
           <Route path="/home" element={<VideoPlayer />} />
           <Route path="/create-room" element={<CreateRoomForm />} />
+          <Route path="room-index" element={<RoomIndex />} />
           <Route path="/room/:roomId" element={<RoomPage />} />
         </Routes>
       </Layout>
