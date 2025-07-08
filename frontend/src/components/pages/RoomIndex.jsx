@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { submitRequest } from "../../utils/submitRequest";
-import PageCenterLayout from "../layout/PageCenterLayout";
+import RoomCard from "../common/RoomCard";
+import PageCenterLayout from "../layout//PageCenterLayout";
 
 export default function RoomIndex() {
   const [error, setError] = useState(null);
@@ -24,15 +25,15 @@ export default function RoomIndex() {
 
   return (
     <PageCenterLayout>
-      <h1>Room Directory</h1>
+      <h1 className="text-4xl font-semibold mb-4 tracking-tight">
+        _ViewingRooms_
+      </h1>
       {showError && <div style={{ color: "red" }}>{error}</div>}
-      <ul>
+      <div className="flex flex-wrap">
         {roomDirectory.map((room) => (
-          <li key={room.id}>
-            {room.name} (ID: {room.id})
-          </li>
+          <RoomCard key={room.id} room={room} />
         ))}
-      </ul>
+      </div>
     </PageCenterLayout>
   );
 }

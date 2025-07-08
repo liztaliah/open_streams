@@ -2,11 +2,13 @@ from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from dotenv import load_dotenv
 from flask_cors import CORS
+from flask_socketio import SocketIO
 import os
 
 load_dotenv()
 
 db = SQLAlchemy()
+socketio = SocketIO(cors_allowed_origins="*")
 
 def create_app():
     app = Flask(__name__)
@@ -25,5 +27,8 @@ def create_app():
     app.register_blueprint(views)
     app.register_blueprint(auth)
     app.register_blueprint(rooms)
+
+    socketio.init_app(app)
+    from . import chat
 
     return app

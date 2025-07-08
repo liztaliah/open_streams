@@ -22,8 +22,8 @@ export default function RoomCard({ room }) {
       transition"
       onClick={() => navigate(`/room/${room.id}`)}
     >
-      <h2 className="text-xl font-bold mb-2">{room.name}</h2>
-      <p className="text-gray-600">ID: {room.id}</p>
+      <h2 className="text-xl text-white font-bold mb-2">{room.name}</h2>
+      <p className="text-white">ID: {room.id}</p>
       {/* Add more room data here if needed */}
     </div>
   );
