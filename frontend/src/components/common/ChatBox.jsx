@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { io } from "socket.io-client";
+import Input from "./Input";
 
 const SOCKET_URL = "http://localhost:5001"; // Change if your backend runs elsewhere
 
@@ -39,7 +40,7 @@ export default function ChatBox({ roomId, username }) {
   };
 
   return (
-    <div className="w-full max-w-md bg-white rounded shadow p-4 mt-6">
+    <div className="w-full max-w-md bg-black rounded shadow p-4 mt-6">
       <div className="h-48 overflow-y-auto mb-2 border-b">
         {messages.map((msg, idx) => (
           <div key={idx} className="mb-1">
@@ -49,8 +50,8 @@ export default function ChatBox({ roomId, username }) {
         ))}
       </div>
       <form onSubmit={sendMessage} className="flex">
-        <input
-          className="flex-1 border rounded-l px-2 py-1"
+        <Input
+          className="rounded-l"
           value={input}
           onChange={(e) => setInput(e.target.value)}
           placeholder="Type a message..."

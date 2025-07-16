@@ -1,8 +1,10 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 import ErrorMessage from "../common/ErrorMessage";
 import StreamPlayer from "../common/StreamPlayer";
+import ChatBox from "../common/ChatBox";
+import { UserContext } from "../../context/UserContext";
 
 export default function RoomPage() {
   const { roomId } = useParams();
@@ -10,6 +12,7 @@ export default function RoomPage() {
   const [error, setError] = useState(null);
   const [showError, setShowError] = useState(false); // For error animation
   const navigate = useNavigate();
+  const { username } = useContext(UserContext);
 
   // Fetch room data
   useEffect(() => {
@@ -59,6 +62,8 @@ export default function RoomPage() {
       </p>
       {/* Stream Player */}
       <StreamPlayer src={`http://localhost:8080/hls/${streamKey}.m3u8`} />
+      {/* Chat Box */}
+      <ChatBox roomId={room.id} username={username} />
       {/* Placeholder for future: list of users in the room */}
       {/* <div>Users in this room: ...</div> */}
     </div>
