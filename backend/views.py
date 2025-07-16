@@ -3,19 +3,18 @@ from .models import Users
 from .auth_routes import token_required
 import os
 
-views = Blueprint('views', __name__, url_prefix='/api')
+views = Blueprint("views", __name__, url_prefix="/api")
+
 
 @views.route("/users", methods=["GET"])
 def get_user_manifest():
     users = Users.query.all()
     user_list = [
-        {
-            "username": user.username,
-            "creation_time": user.creation_time.isoformat()
-        }
+        {"username": user.username, "creation_time": user.creation_time.isoformat()}
         for user in users
     ]
     return jsonify(user_list)
+
 
 # Route for simple video player
 @views.route("video", methods=["GET"])
