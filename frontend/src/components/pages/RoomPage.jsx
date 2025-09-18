@@ -60,10 +60,17 @@ export default function RoomPage() {
       <p className="mb-4 text-neutral-400">
         Hosted by user ID: <span className="font-mono">{room.host_id}</span>
       </p>
-      {/* Stream Player */}
-      <StreamPlayer src={`http://localhost:8080/hls/${streamKey}.m3u8`} />
-      {/* Chat Box */}
-      <ChatBox roomId={room.id} username={username} />
+      {/* Row layout for chat and video */}
+      <div className="flex flex-row w-full max-w-4xl gap-8">
+        {/* Stream Player on the left */}
+        <div className="flex-1 flex items-center justify-center">
+          <StreamPlayer src={`http://localhost:8080/hls/${streamKey}.m3u8`} />
+        </div>
+        {/* Chat Box on the right */}
+        <div className="flex-shrink-0 w-80">
+          <ChatBox roomId={room.id} username={username} />
+        </div>
+      </div>
       {/* Placeholder for future: list of users in the room */}
       {/* <div>Users in this room: ...</div> */}
     </div>
